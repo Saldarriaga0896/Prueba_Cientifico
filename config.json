@@ -1,0 +1,47 @@
+{
+    "ruta_1" : "/data/prueba_op_base_pivot_var_rpta_alt_enmascarado_trtest.csv",
+    "ruta_2" : "/data/prueba_op_master_customer_data_enmascarado_completa.csv",
+    "ruta_modelos" : "/models/",
+    "columnas_1" : ["nit_enmascarado", "num_oblig_orig_enmascarado", "num_oblig_enmascarado",
+        "fecha_var_rpta_alt", "var_rpta_alt", "banca", "segmento", "producto",
+        "dias_mora_fin", "vlr_obligacion", "vlr_vencido", "saldo_capital",
+        "endeudamiento", "cant_alter_posibles", "promesas_cumplidas",
+        "cant_acuerdo", "marca_alt_apli", "pagos_tanque", "marca_debito_mora",
+        "marca_alternativa_orig"],
+    "columnas_2" : [
+        "nit_enmascarado", "tipo_cli", "genero_cli", "edad_cli", "estado_civil",
+        "tipo_vivienda", "num_hijos", "personas_dependientes", "nivel_academico",
+        "ocup", "act_econom", "total_ing", "tot_activos", "tot_pasivos",
+        "egresos_mes", "tot_patrimonio"],
+
+    "modelos": {
+            "LogisticRegression": {
+                "solver": ["liblinear", "lbfgs", "newton-cg", "newton-cholesky", "sag", "saga"],
+                "penalty": ["l2"],
+                "C": [0.01, 0.1, 1, 10],
+                "max_iter": [1000, 5000, 10000]
+            },
+            "RandomForestClassifier": {
+                "n_estimators": [20,50,100,200,300],
+                "max_features": [5,7,9],
+                "max_depth": [5,10,20,30,40,50],
+                "criterion": ["gini","entropy"]
+            },
+            "SVC": {
+                "kernel": ["linear","rbf","poly"],
+                "C": [0.1,1.0,10.0],
+                "gamma": ["scale","auto",1.0],
+                "degree": [3],
+                "coef0": [0.0]
+            },
+            "KNeighborsClassifier": {
+                "n_neighbors": [3,5,7,9],
+                "weights": ["uniform","distance"],
+                "metric": ["euclidean","manhattan","minkowski"],
+                "p": [1,2]
+            },
+            "GaussianNB": {},
+            "BernoulliNB": {}
+        },
+    "cv_folds": 5
+}
